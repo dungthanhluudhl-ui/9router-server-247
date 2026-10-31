@@ -1,0 +1,14 @@
+# Cách 2: chạy bằng Docker (ảnh chính thức decolua/9router). Dùng khi VPS đã có Docker.
+#   docker compose up -d
+# Mặc định chỉ nghe 127.0.0.1 — đặt Caddy/Cloudflare Tunnel phía trước để có HTTPS.
+services:
+  9router:
+    image: decolua/9router:latest
+    container_name: 9router
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:20128:20128"
+    environment:
+      - DATA_DIR=/app/data
+    volumes:
+      - ./data:/app/data
